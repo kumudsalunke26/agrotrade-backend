@@ -177,18 +177,27 @@ CORS(app, origins=["*"])  # later replace with your Vercel URL
 
 import os
 
-BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+model = None
+df = None
 
-model_path = os.path.join(BASE_DIR, "crop_price_model.pkl")
-csv_path = os.path.join(BASE_DIR, "AgroTrade_Maharashtra_Crop_Prices_Profit.csv")
+def load_resources():
+    global model, df
 
-print("BASE DIR:", BASE_DIR)
-print("FILES:", os.listdir(BASE_DIR))
-print("Model path:", model_path)
-print("CSV path:", csv_path)
+    BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 
-model = joblib.load(model_path)
-df = pd.read_csv(csv_path)
+    model_path = os.path.join(BASE_DIR, "crop_price_model.pkl")
+    csv_path = os.path.join(BASE_DIR, "AgroTrade_Maharashtra_Crop_Prices_Profit.csv")
+
+    print("Loading model and dataset...")
+    print(os.listdir(BASE_DIR))
+
+    model = joblib.load(model_path)
+    df = pd.read_csv(csv_path)
+
+    print("Loaded successfully ✔")
+
+
+load_resources()
 @app.route("/")
 def home():
     return "Backend Running ✅"
