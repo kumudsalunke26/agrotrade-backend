@@ -172,7 +172,7 @@ CORS(app, origins=["*"])  # later replace with your Vercel URL
 model = joblib.load("crop_price_model.pkl")
 
 # ✅ Load dataset
-df = pd.read_csv("AgroTrade_Maharashtra_Crop_Prices_With_Profit.csv")
+df = pd.read_csv("AgroTrade_Maharashtra_Crop_Prices_Profit.csv")
 df.columns = df.columns.str.strip()
 
 
@@ -202,7 +202,7 @@ def predict():
 
         input_data = pd.DataFrame([{
             "Month": int(month),
-            "State": crop.capitalize(),
+            "State": state.capitalize(),
             "Cost_per_Quintal": float(cost),
             "Season": season.capitalize(),
             "Crop": crop.capitalize(),
