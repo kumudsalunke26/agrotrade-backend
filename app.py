@@ -179,9 +179,16 @@ import os
 
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 
-model = joblib.load(os.path.join(BASE_DIR, "crop_price_model.pkl"))
-df = pd.read_csv(os.path.join(BASE_DIR, "AgroTrade_Maharashtra_Crop_Prices_Profit.csv")) 
+model_path = os.path.join(BASE_DIR, "crop_price_model.pkl")
+csv_path = os.path.join(BASE_DIR, "AgroTrade_Maharashtra_Crop_Prices_Profit.csv")
 
+print("BASE DIR:", BASE_DIR)
+print("FILES:", os.listdir(BASE_DIR))
+print("Model path:", model_path)
+print("CSV path:", csv_path)
+
+model = joblib.load(model_path)
+df = pd.read_csv(csv_path)
 @app.route("/")
 def home():
     return "Backend Running ✅"
