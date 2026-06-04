@@ -168,13 +168,19 @@ app = Flask(__name__)
 # ✅ Restrict CORS (change after frontend deploy)
 CORS(app, origins=["*"])  # later replace with your Vercel URL
 
-# ✅ Load model safely
-model = joblib.load("crop_price_model.pkl")
+# # ✅ Load model safely
+# model = joblib.load("crop_price_model.pkl")
 
-# ✅ Load dataset
-df = pd.read_csv("AgroTrade_Maharashtra_Crop_Prices_Profit.csv")
-df.columns = df.columns.str.strip()
+# # ✅ Load dataset
+# df = pd.read_csv("AgroTrade_Maharashtra_Crop_Prices_Profit.csv")
+# df.columns = df.columns.str.strip()
 
+import os
+
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+
+model = joblib.load(os.path.join(BASE_DIR, "crop_price_model.pkl"))
+df = pd.read_csv(os.path.join(BASE_DIR, "AgroTrade_Maharashtra_Crop_Prices_Profit.csv")) 
 
 @app.route("/")
 def home():
@@ -286,7 +292,11 @@ def dashboard():
         return jsonify({"error": str(e)})
 
 
-# ✅ IMPORTANT FOR RENDER
+
+
+    # ✅ IMPORTANT FOR RENDER
 if __name__ == "__main__":
     port = int(os.environ.get("PORT", 5000))
     app.run(host="0.0.0.0", port=port)
+
+
