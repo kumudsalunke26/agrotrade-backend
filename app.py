@@ -185,7 +185,7 @@ def load_resources():
 
     BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 
-    model_path = os.path.join(BASE_DIR, "crop_price_model.pkl")
+    model_path = os.path.join(BASE_DIR, "crop_price_model_clean.pkl")
     csv_path = os.path.join(BASE_DIR, "AgroTrade_Maharashtra_Crop_Prices_Profit.csv")
 
     print("Loading model and dataset...")
